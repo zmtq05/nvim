@@ -16,7 +16,7 @@ return require("packer").startup(function(use_clean)
   use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
-    requires = { plenary, devicons, "MunifTanjim/nui.nvim" }
+    requires = { plenary, devicons, "MunifTanjim/nui.nvim" },
   }
 
   use("stevearc/dressing.nvim")
