@@ -24,4 +24,12 @@ return require("packer").startup(function(use_clean)
   use { treesitter, run = ":TSUpdate" }
 
   use { "windwp/nvim-autopairs", requires = treesitter }
+
+  use {
+    "neovim/nvim-lspconfig",
+    config = 'require("lsp")',
+    requires = {
+      "williamboman/nvim-lsp-installer",
+    },
+  }
 end)
