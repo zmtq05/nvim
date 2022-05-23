@@ -18,7 +18,7 @@ set("i", "<C-e>", "<End>")
 set("n", "<C-q>", "<Cmd>bdelete<CR>")
 set("n", "ga", "ggVG", { desc = "select all" })
 
-set("", "cw", "caw")
+set("n", "cw", "dwi")
 
 set("x", "<Tab>", ">gv")
 set("x", "<S-Tab>", "<gv")
