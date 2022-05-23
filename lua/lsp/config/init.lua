@@ -39,15 +39,44 @@ local default = {
   capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 }
 
-local M = setmetatable({}, {
-  __index = function(_, index)
-    local ok, config = pcall(require, "lsp.config." .. index)
+local function combine(lhs, ...)
+  local configs = { ... }
+
+  local function invoke_if_exists(f, ...)
+    if f then
+      return f(...)
+    end
+  end
+
+  local function new_on_attach(...)
+    invoke_if_exists(lhs.on_attach, ...)
+    for _, config in ipairs(configs) do
+      invoke_if_exists(config.on_attach, ...)
+    end
+  end
+
+  local new_config = vim.tbl_deep_extend("force", lhs, ...)
+  new_config.on_attach = new_on_attach
+  return new_config
+end
+
+return setmetatable({}, {
+  __index = function(_, server_name)
+    if server_name == "default" then
+      return default
+    end
+
+    local ok, config = pcall(require, "lsp.config." .. server_name)
     if not ok then
       return default
     else
-      return vim.tbl_deep_extend("force", default, config)
+      return config
     end
   end,
+  __call = function(_, ...)
+    if vim.tbl_isempty(...) then
+      return default
+    end
+    return combine(default, ...)
+  end
 })
-
-return M

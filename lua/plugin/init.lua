@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-parameter
 local use = require("packer-tools.wrapper").new {
   inject_config = { enable = true, prefix = "plugin.config." },
 }
@@ -31,6 +32,7 @@ return require("packer").startup(function(use_clean)
     requires = {
       "williamboman/nvim-lsp-installer",
       "hrsh7th/cmp-nvim-lsp",
+      "folke/lua-dev.nvim",
     },
   }
 
