@@ -1,15 +1,55 @@
+local set = vim.keymap.set
 local cmp = require("cmp")
-local luasnip = require("luasnip")
+local ls = require("luasnip")
 
 local function locally_jumpable(dir)
-  return luasnip.in_snippet() and luasnip.jumpable(dir)
+  return ls.in_snippet() and ls.jumpable(dir)
 end
+
 require("luasnip.loaders.from_vscode").lazy_load()
+
+ls.config.set_config {
+  updateevents = "TextChanged,TextChangedI",
+  enable_autosnippets = false,
+  ext_opts = {
+    [require("luasnip.util.types").choiceNode] = {
+      active = {
+        virt_text = { { "●", "Cursor" } },
+      },
+    },
+  },
+}
+
+set({ "i", "s" }, "<M-p>", function()
+  if ls.expand_or_jumpable() then
+    ls.expand()
+  end
+end)
+set({ "i", "s" }, "<M-j>", function()
+  if ls.jumpable(1) then
+    ls.jump(1)
+  end
+end)
+set({ "i", "s" }, "<M-k>", function()
+  if ls.jumpable(-1) then
+    ls.jump(-1)
+  end
+end)
+set({ "i", "s" }, "<M-l>", function()
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
+end)
+set({ "i", "s" }, "<M-h>", function()
+  if ls.choice_active() then
+    ls.change_choice(-1)
+  end
+end)
 
 cmp.setup {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      ls.lsp_expand(args.body)
     end,
   },
   sources = cmp.config.sources({
@@ -35,14 +75,14 @@ cmp.setup {
     ["<C-l>"] = cmp.mapping.confirm { select = true },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if locally_jumpable(1) then
-        luasnip.jump(1)
+        ls.jump(1)
       else
         fallback()
       end
     end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
       if locally_jumpable(-1) then
-        luasnip.jump(-1)
+        ls.jump(-1)
       else
         fallback()
       end
