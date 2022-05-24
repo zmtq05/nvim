@@ -78,5 +78,5 @@ return setmetatable({}, {
       return default
     end
     return combine(default, ...)
-  end
+  end,
 })

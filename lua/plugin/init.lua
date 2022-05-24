@@ -33,6 +33,7 @@ return require("packer").startup(function(use_clean)
       "williamboman/nvim-lsp-installer",
       "hrsh7th/cmp-nvim-lsp",
       "folke/lua-dev.nvim",
+      plenary,
     },
   }
 
