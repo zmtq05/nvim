@@ -11,4 +11,6 @@ local lazygit = Terminal:new {
   direction = "float",
   hidden = true,
 }
-vim.keymap.set("n", "<leader>m", function() lazygit:toggle() end)
+vim.keymap.set("n", "<leader>m", function()
+  lazygit:toggle()
+end)
