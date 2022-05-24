@@ -6,6 +6,7 @@ return require("packer").startup(function(use_clean)
   local treesitter = "nvim-treesitter/nvim-treesitter"
   local devicons = "kyazdani42/nvim-web-devicons"
   local plenary = "nvim-lua/plenary.nvim"
+  local telescope = "nvim-telescope/telescope.nvim"
 
   use_clean {
     "wbthomason/packer.nvim",
@@ -65,5 +66,12 @@ return require("packer").startup(function(use_clean)
       },
       "onsails/lspkind.nvim",
     },
+  }
+
+  use {
+    telescope,
+    requires = {
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    }
   }
 end)
