@@ -15,12 +15,15 @@ return require("packer").startup(function(use_clean)
   use_clean("~/repo/OneDark-Pro.nvim")
 
   use {
+    "stevearc/dressing.nvim",
+    "akinsho/toggleterm.nvim"
+  }
+
+  use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     requires = { plenary, devicons, "MunifTanjim/nui.nvim" },
   }
-
-  use("stevearc/dressing.nvim")
 
   use { treesitter, run = ":TSUpdate" }
 
