@@ -22,6 +22,20 @@ require("nvim-lsp-installer").setup {
 local lspconfig = require("lspconfig")
 local configs = require("lsp.config")
 
+local null = require("null-ls")
+null.setup {
+  sources = {
+    null.builtins.formatting.stylua,
+  },
+}
+
+require("fidget").setup {
+  text = { spinner = "dots_negative" },
+  sources = {
+    ["null-ls"] = { ignore = true },
+  },
+}
+
 for _, server in ipairs(configured_servers) do
   lspconfig[server].setup(configs[server])
 end

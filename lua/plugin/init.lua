@@ -16,7 +16,7 @@ return require("packer").startup(function(use_clean)
 
   use {
     "stevearc/dressing.nvim",
-    "akinsho/toggleterm.nvim"
+    "akinsho/toggleterm.nvim",
   }
 
   use_clean {
@@ -42,7 +42,9 @@ return require("packer").startup(function(use_clean)
     requires = {
       "williamboman/nvim-lsp-installer",
       "hrsh7th/cmp-nvim-lsp",
+      "jose-elias-alvarez/null-ls.nvim",
       "folke/lua-dev.nvim",
+      "j-hui/fidget.nvim",
       plenary,
     },
   }
