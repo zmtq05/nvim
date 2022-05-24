@@ -19,6 +19,13 @@ return require("packer").startup(function(use_clean)
     "akinsho/toggleterm.nvim"
   }
 
+  use_clean {
+    { "rafcamlet/nvim-luapad", cmd = { "Luapad", "LuaRun", "Lua" } },
+    "matze/vim-move",
+    "tpope/vim-surround",
+    "tpope/vim-repeat",
+  }
+
   use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
