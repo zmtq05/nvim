@@ -20,6 +20,7 @@ return require("packer").startup(function(use_clean)
     "stevearc/dressing.nvim",
     "akinsho/toggleterm.nvim",
     "lewis6991/gitsigns.nvim",
+    "mhinz/vim-startify",
   }
 
   use_clean {
